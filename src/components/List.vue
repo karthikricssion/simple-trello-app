@@ -1,5 +1,5 @@
 <template>
-  <div class="draggable-item">
+  <div class="single-list-container">
     <h6 class="list-drag-handle">{{listItem.data}}</h6>
 
     <Cards 
@@ -8,19 +8,32 @@
       :list="listItem"
     />
 
-    <input type="text" 
-      v-model="title" 
-      @keyup.enter="createCard"
-    />
+    <template v-if="view.addCard">
+      <div class="add-card-input-area">
+        <textarea 
+          v-model="description" 
+          @keyup.enter.exact="createCard"
+        />
+        <div class="add-card-actions">
+          <button class="btn btn-success" @click="createCard">Add</button>
+          <button class="btn btn-link" @click="view.addCard = false; description = ''">Cancel</button>
+        </div>
+      </div>
+    </template>
+
+    <template v-else>
+      <button class="add-new-card-btn" @click="view.addCard = true">Add a card..</button>
+    </template>
 
   </div>
 </template>
 
 <script>
 import Cards from './Cards';
-const newCardObj = (cardTitle) =>  {
+const newCardObj = (cardDescription) =>  {
   return {
-    data: cardTitle,
+    title: '',
+    description: cardDescription,
     comments: []
   }
 }
@@ -33,19 +46,23 @@ export default {
   },
   data() {
     return {
-      title: ''
+      description: '',
+      view: {
+        addCard: false
+      }
     }
   },
   methods: {
     createCard: function() {
-      var cardTitle = this.title.trim()
-      if(cardTitle) {
+      var cardDescription = this.description.trim()
+      if(cardDescription) {
         var self = this
         this.$store.dispatch('addCardToList', {
           listId: self.listItem.uid, 
-          card: newCardObj(cardTitle)
+          card: newCardObj(cardDescription)
         })
-        this.title = ''
+        this.view.addCard = false
+        this.description = ''
       } else {
         console.log('Dude, u need have a look at the card title')
       }
@@ -56,6 +73,69 @@ export default {
 </script>
 
 <style lang="less">
+
+.single-list-container {
+  background-color: #e2e4e6;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 8px 0px 8px 8px;
+  width: 300px;
+
+  h6 {
+    padding: 8px;
+    margin: 0;
+  }
+}
+
+.add-card-input-area {
+  padding: 0 8px 8px 8px;
+  textarea {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    background-color: #fff;
+    padding: 8px;
+    color: #4d4d4d;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    border-radius: 3px;
+    outline: 0 !important;
+    resize: none;
+    width: 100%;
+  }
+
+  .add-card-actions {
+    button {
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 400;
+
+      &.btn-link {
+        color: #4d4d4d;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.add-new-card-btn {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 8px;
+  display: block;
+  width: 100%;
+  text-align: left;
+  color: #838c91;
+  font-size: 16px;
+  outline: 0 !important;
+
+  &:hover {
+    background-color: #cdd2d4;
+    color: #4d4d4d;
+    text-decoration: underline;
+  }
+}
 
 </style>
 

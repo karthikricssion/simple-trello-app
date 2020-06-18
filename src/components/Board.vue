@@ -1,8 +1,10 @@
 <template>
-    <section class="lists-container">
+    <section class="board-container">
       <Lists />
-      <div class="add-list-input">
-        <input type="text" v-model="title" @keyup.enter="createList"  placeholder="Add new list.."/>
+      <div class="add-list-input-wrapper">
+        <div class="add-list-input">
+          <input type="text" v-model="title" @keyup.enter="createList"  placeholder="Add new list.." />
+        </div>
       </div>
     </section>
 </template>
@@ -43,12 +45,42 @@ export default {
 </script>
 
 <style lang="less">
-.lists-container {
-  overflow-x: scroll;
-  white-space: nowrap;
+.board-container {
+  display: flex;
 }
-.add-list-input {
-  display: inline-block;
-  vertical-align: top;
+
+.add-list-input-wrapper {
+  // flex: 0 0 300px;
+  width: 300px;
+
+  .add-list-input {
+    background-color: #006aa7;  
+    border-radius: 5px;
+    transition: background-color 150ms;
+    margin: 8px;
+
+    input {
+      border: 0;
+      width: 100%;
+      background-color: transparent;
+      padding: 8px;
+      font-size: 16px;
+      font-weight: 400;
+      color: #a5cae0;
+
+      &::placeholder {
+        color: #a5cae0;
+        opacity: 1; 
+      }
+
+      &:-ms-input-placeholder {
+        color: #a5cae0;
+      }
+
+      &::-ms-input-placeholder {
+        color:#a5cae0;
+      }
+    }
+  }
 }
 </style>

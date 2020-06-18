@@ -1,6 +1,6 @@
 <template>
-  <div class="card-drag-handle">
-    {{cardItem}}
+  <div class="card card-drag-handle">
+    {{cardItem.description}}
   </div>
 </template>
 
@@ -12,9 +12,15 @@ export default {
 </script>
 
 <style lang="less">
-.card-drag-handle {
-  display: block;
+.card {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
   background-color: #fff;
-  border-radius: 3px;
+  padding: 8px;
+  color: #4d4d4d;
+  border-bottom: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 8px;
 }
 </style>

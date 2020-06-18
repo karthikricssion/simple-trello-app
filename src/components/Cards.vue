@@ -1,15 +1,14 @@
 <template>
-  <div class="list-cards-wrapper">
+  <div class="list-cards-container">
     <Container 
       group-name="list"
       drag-class="card-ghost"
       drop-class="card-ghost-drop"
-      non-drag-area-selector=".icon"
       :get-child-payload="getCardPayload(listId)"
       :animation-duration="100"
       @drop="e => onCardDropComplete(e, list, listIndex)"
       >
-        <Draggable v-for="(item, index) in getListCardsyId(listId)" :key="index" class="cards-wrapper">
+        <Draggable v-for="(item, index) in getListCardsyId(listId)" :key="index" class="single-card">
           <Card :cardItem="item" />
         </Draggable>
     </Container>
@@ -84,22 +83,14 @@ export default {
 </script>
 
 <style lang="less">
-.board-lists-wrapper {
-  display: inline-block;
-  vertical-align: top;
+.list-cards-container {
+  padding: 8px;
 
-  .board-lists {
-    .list-wrapper {
-      background-color: #cccccc;
-      margin: 8px;
-      display: inline-block;
-      vertical-align: top;
-      min-width: 300px;
-      border-radius: 3px;
-
-      h6 {
-        padding: 8px;
-      }
+  .single-card {
+    &:last-child {
+      .card {
+        margin-bottom: 0;
+      }     
     }
   }
 }

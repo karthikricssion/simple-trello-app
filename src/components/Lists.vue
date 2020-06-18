@@ -1,11 +1,10 @@
 <template>
-  <div class="board-lists-wrapper">
+  <div v-if="getBoardLists().length" class="board-list-container">
     <Container 
       lock-axis="x"
       orientation="horizontal"
       drag-handle-selector=".list-drag-handle"
       @drop="onListDrop"
-      class="board-lists"
       >
         <Draggable v-for="(item, index) in getBoardLists()" :key="index" class="list-wrapper">
           <List 
@@ -49,23 +48,7 @@ export default {
 </script>
 
 <style lang="less">
-.board-lists-wrapper {
-  display: inline-block;
-  vertical-align: top;
-
-  .board-lists {
-    .list-wrapper {
-      background-color: #cccccc;
-      margin: 8px;
-      display: inline-block;
-      vertical-align: top;
-      min-width: 300px;
-      border-radius: 3px;
-
-      h6 {
-        padding: 8px;
-      }
-    }
-  }
+.list-wrapper {
+  min-width: 300px;
 }
 </style>
