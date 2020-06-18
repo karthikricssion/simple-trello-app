@@ -36,6 +36,15 @@ const mutations = {
 
   moveCard(state, data) {
     state.lists.splice(data.columnIndex, 1, data.newColumn)
+  },
+
+  removeList(state, list) {
+    state.lists.splice(state.lists.indexOf(list), 1)
+  },
+
+  removeListCard(state, { card, listIndex }) {
+    var cardIndex = state.lists[listIndex].cards.indexOf(card)
+    state.lists[listIndex].cards.splice(cardIndex, 1)
   }
 }
 
@@ -57,7 +66,18 @@ const actions = {
 
   moveCard ({commit}, dropCardResult) {
     commit('moveCard', dropCardResult)
-  }
+  },
+
+  removeList ({commit}, list) {
+    commit('removeList', list)
+  },
+
+  removeListCard ({commit}, cardDetails) {
+    commit('removeListCard', {
+      card: cardDetails.card,
+      listIndex: cardDetails.listIndex
+    })
+  },
 }
 
 const getters = {

@@ -12,6 +12,8 @@
     "less": "^3.11.3",
     "less-loader": "^6.1.1",
     "vue": "^2.6.11",
+    "vue-material-design-icons": "^4.7.1",
+    "vue-material-icon": "^1.0.1",
     "vue-smooth-dnd": "^0.8.1",
     "vuex": "^3.4.0"
   },

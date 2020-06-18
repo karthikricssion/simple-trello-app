@@ -1,7 +1,6 @@
 <template>
   <div v-if="getBoardLists().length" class="board-list-container">
     <Container 
-      lock-axis="x"
       orientation="horizontal"
       drag-handle-selector=".list-drag-handle"
       @drop="onListDrop"
@@ -48,7 +47,12 @@ export default {
 </script>
 
 <style lang="less">
-.list-wrapper {
-  min-width: 300px;
+.board-list-container {
+  display: inline-block;
+  vertical-align: top;
+
+  .list-wrapper {
+    min-width: 300px;
+  }
 }
 </style>

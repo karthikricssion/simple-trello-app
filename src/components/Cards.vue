@@ -9,7 +9,7 @@
       @drop="e => onCardDropComplete(e, list, listIndex)"
       >
         <Draggable v-for="(item, index) in getListCardsyId(listId)" :key="index" class="single-card">
-          <Card :cardItem="item" />
+          <Card :cardItem="item" :listIndex="listIndex" />
         </Draggable>
     </Container>
   </div>

@@ -1,6 +1,8 @@
 <template>
   <div class="single-list-container">
-    <h6 class="list-drag-handle">{{listItem.data}}</h6>
+    <h6 class="list-drag-handle">{{listItem.data}}
+      <delete-icon @click="deleteList" fillColor="#838b91" :size="18" />
+    </h6>
 
     <Cards 
       :listId="listItem.uid" 
@@ -30,6 +32,7 @@
 
 <script>
 import Cards from './Cards';
+
 const newCardObj = (cardDescription) =>  {
   return {
     title: '',
@@ -66,6 +69,9 @@ export default {
       } else {
         console.log('Dude, u need have a look at the card title')
       }
+    },
+    deleteList: function() {
+      this.$store.dispatch('removeList', this.listItem)
     }
   }
 }
@@ -76,21 +82,38 @@ export default {
 
 .single-list-container {
   background-color: #e2e4e6;
+  white-space: normal;
   border-radius: 3px;
   overflow: hidden;
   margin: 8px 0px 8px 8px;
   width: 300px;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
 
   h6 {
     padding: 8px;
     margin: 0;
+    position: relative;
+    padding-right: 32px;
+
+    span {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      padding: 4px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
   }
 }
 
 .add-card-input-area {
   padding: 0 8px 8px 8px;
+  
   textarea {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 1.3;
     background-color: #fff;

@@ -46,12 +46,15 @@ export default {
 
 <style lang="less">
 .board-container {
-  display: flex;
+  display: block;
+  white-space: nowrap;
 }
 
 .add-list-input-wrapper {
   // flex: 0 0 300px;
   width: 300px;
+  display: inline-block;
+  vertical-align: top;
 
   .add-list-input {
     background-color: #006aa7;  
