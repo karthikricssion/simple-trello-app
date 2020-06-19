@@ -4,6 +4,7 @@ import VueMaterialIcon from 'vue-material-icon';
 import DeleteIcon from 'vue-material-design-icons/Delete.vue';
 import HomeIcon from 'vue-material-design-icons/Home.vue';
 import CloseIcon from 'vue-material-design-icons/Close.vue'
+import TextareaAutosize from 'vue-textarea-autosize'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Vue from 'vue'
 import App from './App.vue'
@@ -17,6 +18,7 @@ Vue.component('close-icon', CloseIcon);
 Vue.component('home-icon', HomeIcon);
 Vue.use(require('vue-moment'));
 Vue.use(BootstrapVue)
+Vue.use(TextareaAutosize)
 Vue.use(IconsPlugin)
 
 new Vue({

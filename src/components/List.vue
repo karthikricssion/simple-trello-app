@@ -1,6 +1,13 @@
 <template>
   <div class="single-list-container">
-    <h6 class="list-drag-handle">{{listItem.data}}
+    <h6 class="list-drag-handle">
+      <textarea-autosize
+        placeholder="Give a title"
+        ref="myTextarea"
+        v-model="listItem.data"
+        :min-height="20"
+        :max-height="350"
+      />
       <delete-icon @click="deleteList" fillColor="#838b91" :size="18" />
     </h6>
 
@@ -12,10 +19,13 @@
 
     <template v-if="view.addCard">
       <div class="add-card-input-area">
-        <textarea 
+        <textarea-autosize
+          placeholder="Short description"
           ref="typeBox"
           v-model="description" 
           @keyup.enter.exact="createCard"
+          :min-height="30"
+          :max-height="350"
         />
         <div class="add-card-actions">
           <button class="btn btn-success" @click="createCard">Add</button>
@@ -77,7 +87,7 @@ export default {
       this.view.addCard = true
       var self = this      
       setTimeout(function () {
-        self.$refs.typeBox.focus()
+        self.$refs.typeBox.$el.focus()
       }, 1)
     },
 
@@ -105,6 +115,14 @@ export default {
     margin: 0;
     position: relative;
     padding-right: 32px;
+    border-bottom: 1px solid #d0d1d2;
+
+    textarea {
+      width: 100%;
+      border: 0;
+      resize: none;
+      background-color: transparent;
+    }
 
     span {
       position: absolute;
