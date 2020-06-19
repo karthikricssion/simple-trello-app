@@ -45,6 +45,15 @@ const mutations = {
   removeListCard(state, { card, listIndex }) {
     var cardIndex = state.lists[listIndex].cards.indexOf(card)
     state.lists[listIndex].cards.splice(cardIndex, 1)
+  },
+
+  updateCardInList(state, { card, listIndex }) {
+    state.lists[listIndex].cards = state.lists[listIndex].cards.map(item => {
+      if(item.uid == card.uid) {
+        return card
+      }
+      return item
+    })
   }
 }
 
@@ -78,6 +87,13 @@ const actions = {
       listIndex: cardDetails.listIndex
     })
   },
+
+  updateCardInList ({commit}, cardDetails) {
+    commit('updateCardInList', {
+      card: cardDetails.card,
+      listIndex: cardDetails.listIndex
+    })
+  }
 }
 
 const getters = {

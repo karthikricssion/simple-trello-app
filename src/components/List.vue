@@ -35,6 +35,7 @@ import Cards from './Cards';
 
 const newCardObj = (cardDescription) =>  {
   return {
+    uid: (Date.now()).toString(),
     title: '',
     description: cardDescription,
     comments: []
@@ -132,6 +133,7 @@ export default {
       text-transform: uppercase;
       font-size: 14px;
       font-weight: 400;
+      margin-right: 8px;;
 
       &.btn-link {
         color: #4d4d4d;

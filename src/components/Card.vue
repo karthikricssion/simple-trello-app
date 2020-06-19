@@ -1,27 +1,43 @@
 <template>
-  <div class="card card-drag-handle">
-    {{cardItem.description}}
-
-    <close-icon @click="deleteCard" :size="18" />
+  <div class="card-drag-handle">
+    <div class="card" @click="showModal = true">
+      {{cardItem.description}}
+      <close-icon @click="deleteCard" :size="18" />
+    </div>
+    <CardEdit 
+      v-if="showModal" 
+      @close="showModal = false" 
+      :itemToEdit="cardItem" 
+      :listIndex="listIndex" 
+      @deleteCard="deleteCard"
+    />
   </div>
 </template>
 
 <script>
-
-export default {
-  name: 'Card',
-  props: ['cardItem', 'listIndex'],
-  methods: {
-    deleteCard: function() {
-      var self = this
-      this.$store.dispatch('removeListCard', {
-        card: self.cardItem,
-        listIndex: self.listIndex
-      })
+  import CardEdit from './CardEditModal.vue';
+  
+  export default {
+    name: 'Card',
+    props: ['cardItem', 'listIndex'],
+    components: {
+      CardEdit
+    },
+    data() {
+      return {
+        showModal: false
+      }
+    },
+    methods: {
+      deleteCard: function() {
+        var self = this
+        this.$store.dispatch('removeListCard', {
+          card: self.cardItem,
+          listIndex: self.listIndex
+        })
+      }
     }
   }
-}
-
 </script>
 
 <style lang="less">

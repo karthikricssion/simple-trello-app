@@ -10,6 +10,7 @@ Vue.config.productionTip = false
 Vue.component(VueMaterialIcon.name, VueMaterialIcon)
 Vue.component('delete-icon', DeleteIcon);
 Vue.component('close-icon', CloseIcon);
+Vue.use(require('vue-moment'));
 
 new Vue({
   store,
