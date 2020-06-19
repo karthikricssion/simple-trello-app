@@ -8,7 +8,7 @@
       :animation-duration="100"
       @drop="e => onCardDropComplete(e, list, listIndex)"
       >
-        <Draggable v-for="(item, index) in getListCardsyId(listId)" :key="index" class="single-card">
+        <Draggable v-for="(item, index) in getBoardListCardsyId(list.boardId, listId)" :key="index" class="single-card">
           <Card :cardItem="item" :listIndex="listIndex" />
         </Draggable>
     </Container>
@@ -49,8 +49,8 @@ export default {
 
   computed: {
     ...mapGetters([
-      'getListCardsyId',
-      'getBoardLists'
+      'getBoardListCardsyId',
+      'getBoardListsById'
     ])
   },
 
@@ -67,7 +67,7 @@ export default {
     },
 
     getCardPayload (columnId) {
-      const lists = this.getBoardLists()
+      const lists = this.getBoardListsById(this.list.boardId)
       return index => {
         return (
           lists.filter(p => p.uid === columnId)[0].cards[index]

@@ -31,10 +31,7 @@
     methods: {
       deleteCard: function() {
         var self = this
-        this.$store.dispatch('removeListCard', {
-          card: self.cardItem,
-          listIndex: self.listIndex
-        })
+        this.$store.dispatch('removeBoardListCard', self.cardItem )
       }
     }
   }

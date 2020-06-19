@@ -1,11 +1,12 @@
 <template>
-  <div v-if="getBoardLists().length" class="board-list-container">
+  <div v-if="getBoardListsById(boardId).length" class="board-list-container">
     <Container 
       orientation="horizontal"
       drag-handle-selector=".list-drag-handle"
+      :get-child-payload="getListPayload(boardId)"
       @drop="onListDrop"
       >
-        <Draggable v-for="(item, index) in getBoardLists()" :key="index" class="list-wrapper">
+        <Draggable v-for="(item, index) in getBoardListsById(boardId)" :key="index" class="list-wrapper">
           <List 
             :listItem="item"
             :listIndex="index"
@@ -22,6 +23,7 @@ import List from './List'
 
 export default {
   name: 'Lists',
+  props: ['boardId'],
   components: {
     Container,
     Draggable,
@@ -30,13 +32,23 @@ export default {
 
   computed: {
     ...mapGetters([
-      'getBoardLists'
+      'getBoards',
+      'getBoardListsById'
     ])
   },
 
   methods: {
     onListDrop(dropResult) {
       this.$store.dispatch('applyListDrag', dropResult)
+    },
+
+    getListPayload: function(boardId) {
+      const boards = this.getBoards()
+      return index => {
+        return (
+          boards.filter(p => p.uid === boardId)[0].lists[index]
+        )
+      }
     },
 
     getGhostParent() {

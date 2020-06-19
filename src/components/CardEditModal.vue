@@ -70,10 +70,7 @@ export default {
   methods: {
     updateContant: function() {
       var self = this
-      this.$store.dispatch('updateCardInList', {
-        card: self.itemToEdit,
-        listIndex: self.listIndex
-      })
+      this.$store.dispatch('updateCardInBoardList', self.itemToEdit )
       this.$emit('close')
     },
 

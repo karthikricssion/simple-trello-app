@@ -13,6 +13,7 @@
     <template v-if="view.addCard">
       <div class="add-card-input-area">
         <textarea 
+          ref="typeBox"
           v-model="description" 
           @keyup.enter.exact="createCard"
         />
@@ -24,7 +25,7 @@
     </template>
 
     <template v-else>
-      <button class="add-new-card-btn" @click="view.addCard = true">Add a card..</button>
+      <button class="add-new-card-btn" @click="openAddCard()">Add a card..</button>
     </template>
 
   </div>
@@ -33,8 +34,10 @@
 <script>
 import Cards from './Cards';
 
-const newCardObj = (cardDescription) =>  {
+const newCardObj = (cardDescription, listItem) =>  {
   return {
+    boardId: listItem.boardId,
+    listId: listItem.uid,
     uid: (Date.now()).toString(),
     title: '',
     description: cardDescription,
@@ -56,21 +59,28 @@ export default {
       }
     }
   },
+
   methods: {
     createCard: function() {
       var cardDescription = this.description.trim()
       if(cardDescription) {
         var self = this
-        this.$store.dispatch('addCardToList', {
-          listId: self.listItem.uid, 
-          card: newCardObj(cardDescription)
-        })
+        this.$store.dispatch('addCardToList', newCardObj(cardDescription, self.listItem))
         this.view.addCard = false
         this.description = ''
       } else {
         console.log('Dude, u need have a look at the card title')
       }
     },
+
+    openAddCard: function() {
+      this.view.addCard = true
+      var self = this      
+      setTimeout(function () {
+        self.$refs.typeBox.focus()
+      }, 1)
+    },
+
     deleteList: function() {
       this.$store.dispatch('removeList', this.listItem)
     }
