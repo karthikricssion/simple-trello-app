@@ -13,17 +13,24 @@ Below is the two screanshots of v1 of trello clone app
 .
 ├── App.vue
 ├── assets
+│   ├── boards.png
+│   ├── card-edit.png
 │   ├── card-pop-up.png
+│   ├── lists.png
 │   ├── logo.png
+│   ├── serve.png
 │   └── trello-overview.png
 ├── components
 │   ├── Board.vue
 │   ├── Card.vue
 │   ├── CardEditModal.vue
 │   ├── Cards.vue
+│   ├── Home.vue
 │   ├── List.vue
 │   └── Lists.vue
+├── dummy.js
 ├── main.js
+├── router.js
 ├── store.js
 └── utils.js
 ```
