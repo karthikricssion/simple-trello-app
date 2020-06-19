@@ -5,6 +5,7 @@
         <router-link :to="{ name: 'home' }" class="home-icon-link">
           <home-icon fillColor="#fff" />
         </router-link>
+        
         <b-dropdown id="dropdown-1" text="Boards" class="m-md-2">
           <b-dropdown-item 
             v-for="(board, index) in getBoards()" 
@@ -14,8 +15,14 @@
             {{board.title}}
           </b-dropdown-item>
         </b-dropdown>
+
         <div class="board-title">
           <input type="text" v-model="board.title" placeholder="Give a name for Board" />
+        </div>
+
+        <div class="delete-board-icon" @click="deleteBoard" >
+          <delete-icon fillColor="#fff" :size="18" />
+          <span class="text-del">Delete Board</span>
         </div>
       </div>
     </div>
@@ -74,7 +81,21 @@ export default {
     getBoardDetails: function(boardId) {
       this.boardId = boardId
       this.board = this.getBoardById(boardId)
-      this.load = false
+      if(this.board) {
+        this.load = false
+      } else {
+        this.$router.push({
+          name: 'home'
+        })
+      }      
+    },
+
+    deleteBoard: function() {
+      this.$store.dispatch('deleteBoard', this.board)
+
+      this.$router.push({
+        name: 'home'
+      })
     },
 
     createList: function() {
@@ -94,6 +115,33 @@ export default {
 .board-details {
   height: 56px;
   background-color: #0067a3;
+  position: relative;
+
+  .delete-board-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px;
+    background-color: #a0443a;
+    color: #fff;
+    margin: 9px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    .delete-icon {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .text-del {
+      display: inline-block;
+      vertical-align: top;
+      padding-top: 5px;
+      padding-left: 4px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+  }
 
   .board-lists {
     button {

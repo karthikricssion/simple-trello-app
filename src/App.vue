@@ -5,8 +5,13 @@
 </template>
 
 <script>
+import DummyData from './dummy';
+
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    this.$store.dispatch('addBoard', DummyData[0])
+  }
 }
 </script>
 
@@ -39,8 +44,7 @@ export default {
   }
 
   .scroll-x {
-    overflow: hidden;
-    overflow-x: auto;
+    overflow: auto;
     
     &::-webkit-scrollbar {
       width: 2px;

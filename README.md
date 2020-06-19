@@ -2,9 +2,11 @@
 It's a task management app for SME companies. It help to organize and move create there own priorites list and following tasks. Depends on the status of the tasks, the task can be moved from one list to the another by simply drag and drop. If need to include any sets of process in between a list. It can be done by dragging to its respective positions.
 
 Below is the two screanshots of v1 of trello clone app
-![App-home-page](./src/assets/trello-overview.png)
+![App-home-page](./src/assets/boards.png)
 
-![App-card-model](./src/assets/card-pop-up.png)
+![list-home-page](./src/assets/lists.png)
+
+![card-model](./src/assets/card-pop-up.png)
 
 #### File and Folder structure of the app
 ```

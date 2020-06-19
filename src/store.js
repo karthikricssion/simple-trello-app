@@ -109,6 +109,10 @@ const mutations = {
       }
       return board
     })
+  },
+
+  deleteBoard(state, board) {
+    state.boards.splice(state.boards.indexOf(board), 1)
   }
 }
 
@@ -117,6 +121,12 @@ const actions = {
     commit('addBoard', {
       ...board,
       uid: board.uid || (Date.now()).toString()
+    })
+  },
+
+  deleteBoard ({ commit }, board) {
+    commit('deleteBoard', {
+      ...board
     })
   },
 
